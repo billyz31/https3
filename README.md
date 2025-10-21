@@ -1,7 +1,21 @@
-# billyziiii.gofun.cloud 部署指南
+# HTTPS3 靜態網站部署指南
 
-## 📋 項目概述
-這是一個簡單的靜態網頁項目，用於部署到 Coolify 服務器並通過 HTTPS 提供服務。
+## 項目概述
+此項目為 `billyziiii.gofun.cloud` 域名的靜態網站部署配置。
+
+## 🚀 快速部署
+
+### GitHub Pages 部署步驟
+1. 前往您的GitHub倉庫：https://github.com/billyz31/https3
+2. 進入 Settings → Pages
+3. 在 "Build and deployment" 部分選擇 "Static"
+4. 選擇 "main" 分支作為部署來源
+5. 保存設置，GitHub會自動部署您的靜態網站
+
+### 訪問地址
+部署完成後，您的網站將可通過以下地址訪問：
+- https://billyz31.github.io/https3/
+- 或者自定義域名：https://billyziiii.gofun.cloud（需要配置CNAME）
 
 ## 🚀 快速部署
 
