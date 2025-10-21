@@ -1,0 +1,87 @@
+# billyziiii.gofun.cloud 部署指南
+
+## 📋 項目概述
+這是一個簡單的靜態網頁項目，用於部署到 Coolify 服務器並通過 HTTPS 提供服務。
+
+## 🚀 快速部署
+
+### 方法一：使用 Coolify 控制台
+1. 登入 Coolify 控制台
+2. 創建新應用程序
+3. 選擇「從 Git 倉庫部署」或「從文件上傳」
+4. 上傳本文件夾中的所有文件
+5. 設置環境變數（如需要）
+6. 部署應用
+
+### 方法二：使用 Docker 直接部署
+```bash
+# 構建鏡像
+docker build -t billyziiii-app .
+
+# 運行容器
+docker run -d \
+  --name billyziiii-app \
+  -p 80:80 \
+  -p 443:443 \
+  -v /data/coolify/certs:/etc/nginx/ssl \
+  billyziiii-app
+```
+
+## 📁 文件結構
+```
+HTTPS3/
+├── index.html          # 主頁面文件
+├── nginx.conf          # Nginx 服務器配置
+├── Dockerfile          # Docker 構建配置
+└── README.md           # 說明文件
+```
+
+## 🔧 配置說明
+
+### Nginx 配置
+- 自動重定向 HTTP 到 HTTPS
+- 啟用 HTTP/2
+- 配置 SSL 證書
+- 設置緩存和安全頭部
+- 包含健康檢查端點
+
+### SSL 證書
+證書文件應該放置在：
+- `/data/coolify/certs/billyziiii.gofun.cloud.cert`
+- `/data/coolify/certs/billyziiii.gofun.cloud.key`
+
+## 🌐 訪問地址
+- 主頁: https://billyziiii.gofun.cloud
+- 健康檢查: https://billyziiii.gofun.cloud/health
+
+## 📊 監控和日誌
+- 訪問日誌: `/var/log/nginx/access.log`
+- 錯誤日誌: `/var/log/nginx/error.log`
+
+## 🔒 安全特性
+- HTTPS 強制重定向
+- 安全頭部設置 (X-Frame-Options, X-Content-Type-Options, etc.)
+- 現代 TLS 配置
+- Gzip 壓縮啟用
+
+## 🛠️ 故障排除
+
+### 常見問題
+1. **SSL 證書錯誤**: 檢查證書文件權限和路徑
+2. **403 Forbidden**: 檢查文件權限
+3. **502 Bad Gateway**: 檢查 Nginx 是否正常運行
+
+### 日誌檢查
+```bash
+docker logs billyziiii-app
+tail -f /var/log/nginx/error.log
+```
+
+## 📞 支持
+如有問題，請檢查：
+1. Coolify 文檔
+2. Nginx 錯誤日誌
+3. Docker 容器日誌
+
+---
+**成功部署！** 🎉 您的網站現在應該可以通過 https://billyziiii.gofun.cloud 訪問。
